@@ -1,0 +1,89 @@
+#!/usr/bin/python3
+# Made by CLOVER-5 - SQLi#9026 on discord
+# and thanks to Yevgeniy Kosmak on StackOverflow :)
+
+import requests
+import argparse
+import sys
+
+epilog = """Usage: sourcepaste [ FILENAME ] [ LANGUAGE ] [ OPTIONS ]
+
+          Example use(s):
+                sourcepaste testfile.py python 2 6M
+                sourcepaste source.cpp cpp
+                sourcepaste js.js javascript 1
+                """
+
+parser = argparse.ArgumentParser(description='A CLI-based way to post on Pastebin',
+                                 prog="sourcepaste",
+                                 epilog=epilog)
+
+# parsing args, nargs='?' defines privacy and time as optional
+parser.add_argument('source',
+                    help='the file of your source code')
+parser.add_argument('language',
+                    help='the language of your source code | check langs.txt for all available languages')
+parser.add_argument('privacy', nargs='?',
+                    help='how private you want your post | 0 = Public, 1 = Unlisted, 2 = Private | Default = 0')
+parser.add_argument('time', nargs='?',
+                    help="""when your post should expire | N(ever), 10M(inutes), 1H(our), 1D(ay),
+                         1W(eek), 2W(eeks), 1M(onth), 6M(onths), 1Y(ear) | Default = 1W(eek)""")
+
+parse_args = parser.parse_args()
+
+# new user-agent in case of blocking
+headers = {
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36',
+    'Content-Type': 'application/x-www-form-urlencoded'
+}
+
+
+# reading source code
+with open(parse_args.source, "r") as source_code_read:
+    source_code_content = source_code_read.read()
+
+
+# defining post data in relation to amount of inputted args 
+# (minus 1 due to the file name being included)
+if (len(sys.argv) - 1) == 2:
+    data = {
+        "api_dev_key": "<DEVKEY>",
+        "api_paste_code": source_code_content,
+        "api_option": "paste",
+        "api_user_key": "<USERKEY>",
+        "api_paste_expire_date": "1W",
+        "api_paste_private": "0",
+        "api_paste_name": f"{parse_args.source}@{parse_args.language}",
+        "api_paste_format": parse_args.language
+    }
+elif (len(sys.argv) - 1) == 3:
+    data = {
+        "api_dev_key": "<DEVKEY>",
+        "api_paste_code": source_code_content,
+        "api_option": "paste",
+        "api_user_key": "<USERKEY>",
+        "api_paste_expire_date": "1W",
+        "api_paste_private": parse_args.privacy,
+        "api_paste_name": f"{parse_args.source}@{parse_args.language}",
+        "api_paste_format": parse_args.language
+    }
+elif (len(sys.argv) - 1) == 4:
+    data = {
+        "api_dev_key": "<DEVKEY>",
+        "api_paste_code": source_code_content,
+        "api_option": "paste",
+        "api_user_key": "<USERKEY>",
+        "api_paste_expire_date": parse_args.time,
+        "api_paste_private": parse_args.privacy,
+        "api_paste_name": f"{parse_args.source}@{parse_args.language}",
+        "api_paste_format": parse_args.language
+    }
+else:
+    parser.print_help()
+
+
+# sending post data
+pageget = requests.post("https://pastebin.com/api/api_post.php", headers=headers, data=data)
+
+# printing returned link
+print(pageget.content)
