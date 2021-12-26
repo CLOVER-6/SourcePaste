@@ -31,9 +31,14 @@ apiget = requests.post("https://pastebin.com/api/api_login.php", headers=headers
 
 userkey = apiget.content.decode("utf-8")
 
-# replace every "<USERKEY>" in sourcepaste with a user's actual API user key
-file.write_text(file.read_text().replace('<USERKEY>', userkey))
-
+# stopping incorrect replacement of <USERKEY>, ceasing future API request errors
+# TODO: find way to successfully parse dodgy characters without user having to fix it (url encode doesnt work)
+if "Bad API request" not in userkey:
+	# replace every "<USERKEY>" in sourcepaste with a user's actual API user key
+	file.write_text(file.read_text().replace('<USERKEY>', userkey))
+else:
+	print("A request error occurred, this could be to do with your username/password syntax (see README.md notes) or external problems")
+	
 # copy sourcepaste to /usr/bin, for ease of use
 to_file = Path("/usr/bin")
 
