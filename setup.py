@@ -35,7 +35,7 @@ userkey = apiget.content.decode("utf-8")
 file.write_text(file.read_text().replace('<USERKEY>', userkey))
 
 # copy sourcepaste to /usr/bin, for ease of use
-to_file = Path("/usr/bin")7
+to_file = Path("/usr/bin")
 
 shutil.copy(file, to_file)
 
