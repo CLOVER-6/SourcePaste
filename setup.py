@@ -10,7 +10,6 @@ passwd = sys.argv[3]
 
 # replace every "<DEVKEY>" in sourcepaste with a user's actual API dev key
 file = Path('sourcepaste')
-to_file = Path("/usr/bin")
 
 file.write_text(file.read_text().replace('<DEVKEY>', devkey))
 
@@ -32,10 +31,12 @@ apiget = requests.post("https://pastebin.com/api/api_login.php", headers=headers
 
 userkey = apiget.content.decode("utf-8")
 
-# replace ever "<USERKEY>" in sourcepaste with a user's actual API user key
+# replace every "<USERKEY>" in sourcepaste with a user's actual API user key
 file.write_text(file.read_text().replace('<USERKEY>', userkey))
 
 # copy sourcepaste to /usr/bin, for ease of use
+to_file = Path("/usr/bin")7
+
 shutil.copy(file, to_file)
 
 # show user their userkey
