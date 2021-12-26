@@ -88,4 +88,4 @@ pageget = requests.post("https://pastebin.com/api/api_post.php", headers=headers
 # printing returned link
 print(f"""Your paste is at:
 
-         {pageget.content.decode('utf-8')}""")
+{pageget.content.decode('utf-8')}""")
