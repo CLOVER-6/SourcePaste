@@ -45,4 +45,6 @@ if "Bad API request" not in userkey:
 	print(f"Your user key: {userkey}")
 
 else:
-	print("A request error occurred, this could be to do with your username/password syntax (see README.md notes) or external problems")
+	print("""A request error occurred, this could be to do with your username/password syntax (see README.md notes) or external problems
+	
+	{userkey}""")
