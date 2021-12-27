@@ -103,6 +103,6 @@ if "Bad API request" not in response:
 
     {response}""")
 else:
-    print("""A request error occurred, this could be to do with your username/password syntax (see README.md notes) or external problems
+    print(f"""A request error occurred, this could be to do with your username/password syntax (see README.md notes) or external problems
 	
 	{response}""")
