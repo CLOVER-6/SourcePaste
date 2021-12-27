@@ -39,8 +39,10 @@ if "Bad API request" not in userkey:
 	
 	# copy sourcepaste to /usr/bin, for ease of use
 	to_file = Path("/usr/bin")
-
 	shutil.copy(file, to_file)
+	
+	afterchardir = Path("ignore.dir/afterchar")
+	shutil.copy(afterchardir, to_file)
 	
 	# show user their userkey
 	print(f"Your user key: {userkey}")
