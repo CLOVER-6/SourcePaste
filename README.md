@@ -42,4 +42,4 @@ If you recieve either bug, the simplest fix is to simply quote out the password/
   
 If you successfully do this and then run pastegrok, yet recieve a "Bad API request, invalid api_user_key" error - do the following: open up the sourcepaste file's code, find every mention of "api_user_key", then replace the data pertaining to "api_user_key" with your user key. Also, report the bug to me, as I have already released a patch for it and it should be working - though it might not be!
   
-If these fixes STILL don't work, remove and reinstall pastegrok or message me on Discord :)
+If these fixes STILL don't work, remove and reinstall pastegrok or message me on Discord - SQLi#9026 :)
