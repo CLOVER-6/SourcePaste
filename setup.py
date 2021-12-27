@@ -36,13 +36,14 @@ userkey = apiget.content.decode("utf-8")
 if "Bad API request" not in userkey:
 	# replace every "<USERKEY>" in sourcepaste with a user's actual API user key
 	file.write_text(file.read_text().replace('<USERKEY>', userkey))
+	
+	# copy sourcepaste to /usr/bin, for ease of use
+	to_file = Path("/usr/bin")
+
+	shutil.copy(file, to_file)
+	
+	# show user their userkey
+	print(f"Your user key: {userkey}")
+
 else:
 	print("A request error occurred, this could be to do with your username/password syntax (see README.md notes) or external problems")
-	
-# copy sourcepaste to /usr/bin, for ease of use
-to_file = Path("/usr/bin")
-
-shutil.copy(file, to_file)
-
-# show user their userkey
-print(f"Your user key: {userkey}")
