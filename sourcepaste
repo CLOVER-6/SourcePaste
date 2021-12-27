@@ -2,7 +2,7 @@
 # Made by CLOVER-5 - SQLi#9026 on discord
 # and thanks to Yevgeniy Kosmak on StackOverflow :)
 
-from ignore.dir import afterchar
+import afterchar
 import requests
 import argparse
 import sys
