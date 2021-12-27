@@ -52,7 +52,8 @@ with open(parse_args.source, "r") as source_code_read:
 # defining post data in relation to amount of inputted args 
 # (minus 1 due to the file name being included)
 
-stripped_source = afterchar.afterchar("/", parse_args.source)
+#stripping source file name of directory stuff 
+stripped_source = afterchar("/", parse_args.source)
 
 if (len(sys.argv) - 1) == 2:
     data = {
