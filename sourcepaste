@@ -95,8 +95,14 @@ else:
 
 # sending post data
 pageget = requests.post("https://pastebin.com/api/api_post.php", headers=headers, data=data)
+response = pageget.content.decode('utf-8')
 
-# printing returned link
-print(f"""Your paste is at:
+if "Bad API request" not in response:
+    # printing returned link
+    print(f"""Your paste is at:
 
-{pageget.content.decode('utf-8')}""")
+    {response}""")
+else:
+    print("""A request error occurred, this could be to do with your username/password syntax (see README.md notes) or external problems
+	
+	{response}""")
