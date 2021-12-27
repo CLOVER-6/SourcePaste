@@ -19,7 +19,7 @@ Set the correct chmod permissions:
 And run setup.py with your PasteBin API devkey (https://pastebin.com/doc_api) as the first argument, your PasteBin username as the second, and your PasteBin password as the third:
 
 ---------------------------------------------------------------------------------   
-> sudo python3 setup.py <DEVKEY> <USERNAME> <PASSWORD>
+> sudo python3 setup.py [DEVKEY] [USERNAME] [PASSWORD]
 ---------------------------------------------------------------------------------
 
 That's it! Now you may run SourcePaste like so:
