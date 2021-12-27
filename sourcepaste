@@ -10,7 +10,8 @@ import sys
 def afterchar(charac, stringer):
     charspace = stringer.rindex(charac)
     length = len(stringer)
-    print(stringer[(charspace+1):length])
+    afterchard = stringer[(charspace+1):length]
+    return afterchard
 
 epilog = """Usage: sourcepaste [ FILENAME ] [ LANGUAGE ] [ OPTIONS ]
 
