@@ -2,10 +2,15 @@
 # Made by CLOVER-5 - SQLi#9026 on discord
 # and thanks to Yevgeniy Kosmak on StackOverflow :)
 
-import afterchar
 import requests
 import argparse
 import sys
+
+# afterchar is used to strip filenames of all directory names prior to file
+def afterchar(charac, stringer):
+    charspace = stringer.rindex(charac)
+    length = len(stringer)
+    print(stringer[(charspace+1):length])
 
 epilog = """Usage: sourcepaste [ FILENAME ] [ LANGUAGE ] [ OPTIONS ]
 
@@ -47,7 +52,7 @@ with open(parse_args.source, "r") as source_code_read:
 # defining post data in relation to amount of inputted args 
 # (minus 1 due to the file name being included)
 
-stripped_source = afterchar.afterchar("/", parse_args.source)  # afterchar strips parseargs.source of all directories prior to filename
+stripped_source = afterchar.afterchar("/", parse_args.source)
 
 if (len(sys.argv) - 1) == 2:
     data = {
