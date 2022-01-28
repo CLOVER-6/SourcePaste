@@ -1,4 +1,0 @@
-def afterchar(charac, stringer):
-    charspace = stringer.rindex(charac)
-    length = len(stringer)
-    print(stringer[(charspace+1):length])
