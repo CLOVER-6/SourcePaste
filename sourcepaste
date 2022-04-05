@@ -26,7 +26,9 @@ parser = argparse.ArgumentParser(
 )
 
 # parsing args, nargs='?' defines privacy and time as optional
-parser.add_argument("source", help="the file of your source code")
+parser.add_argument("source", 
+     help="the file of your source code",
+)
 parser.add_argument(
     "language",
     help="the language of your source code | check langs.txt for all available languages",
@@ -61,7 +63,7 @@ with open(parse_args.source, "r") as source_code_read:
 # (minus 1 due to the file name being included)
 
 # stripping source file name of directory stuff
-if "/" in parse_args:
+if "/" in parse_args.source:
     stripped_source = afterchar("/", parse_args.source)
 else:
     stripped_source = parse_args.source
